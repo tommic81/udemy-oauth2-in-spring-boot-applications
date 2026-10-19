@@ -1,0 +1,49 @@
+# Learn to secure Spring Boot applications with the New OAuth 2.0 Stack in Spring Security 5
+
+## Introduction
+- Authorization Framework
+- OAuth is a delegated authorization framework
+- For Web
+- For Mobile
+
+### OAuth 2.0 Roles
+- Resource Owner - a user. uses client application.
+- Resource Server - stores the information
+- Authorization Server - issues Access Tokens to the client apps (Keycloak, AWS Cognito, Octa)
+
+### OAuth 2.0 Client Types 
+- Types:
+  - Mobile app
+  - Native mobile app
+  - Java Web Site on a server
+  - SPA
+- Client app must be registered with the ClientId
+- Confidential CLients - keep secret key on their side. Use their clientId and the secret key to authorize
+- Public Clients - cannot guarantee the safty or confidentiality  of clientId and the secret key
+
+### OAuth Access Token
+- Authorization Server issues the Access Token to a client
+- It is sent with the requests to the Resource Server 
+- The RS validates the token with the AS
+- the Access Token must be stored in a asafe place and sent over SSL connection
+- Access Token Types
+  - Identifier type
+  - Self-contain the authorization information
+  
+#### Identifier type
+- identifier is sent
+- user_id, scope, expires - are stored in the DB and can be found by the identifier
+
+#### Self-contain 
+- JSON format
+- header: alg, type, kid
+- body : exp, auth_time, scope, name, preferred_username, famil_name
+- signature - used to validate the token
+
+### OpenID Connect
+- The additional layer to provide the information about the authenticated user
+- AS which provides identity information is called the identity Provider
+- AS provides: Access Token + ID TOken
+- ID TOken - user identity information ie: 
+  - Standard Claims: name, preferred_username, family_name
+  - Address Claims: formatted, street_address, locality, region, postal_code
